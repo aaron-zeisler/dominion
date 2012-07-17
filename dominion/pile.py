@@ -18,7 +18,7 @@ class Pile(object):
     def dropOne(self, card):
         self.push(card)
 
-    def dropMany(self, cards)
+    def dropMany(self, cards):
         for card in cards:
             self.dropOne(card)
 

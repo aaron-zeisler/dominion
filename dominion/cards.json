@@ -1,4 +1,4 @@
-{
+[
     {
         'name':'Adventurer',
         'set':'Base',
@@ -335,7 +335,7 @@
         },
         'image':'http://dominion.diehrstraits.com/scans/common/curse.jpg'
     },
-}
+]
 
 
 
