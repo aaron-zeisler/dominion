@@ -12,15 +12,11 @@ class Pile(object):
         if len(self.Cards) == 0:
             raise Exception("There are no cards in this pile")
 
-        drawnCard = self.pop()
+        drawnCard = self.Cards.pop()
         return drawnCard
 
-    def dropOne(self, card):
-        self.push(card)
-
-    def dropMany(self, cards):
-        for card in cards:
-            self.dropOne(card)
+    def drop(self, card):
+        self.Cards.append(card)
 
     def shuffle(self):
         if len(self.Cards) == 0:
@@ -28,6 +24,6 @@ class Pile(object):
 
         random.shuffle(self.Cards)
 
-    def length(self):
+    def len(self):
         return len(self.Cards)
 

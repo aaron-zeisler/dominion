@@ -2,17 +2,10 @@
 class Card(object):
 
     Name = None
-    Set = None
     Cost = None
-    Type = None
-    Effects = {}
-    Image = None
+    VictoryPoints = None
 
-    def __init__(self, name=None, set=None, cost=None, type=None, effects={}, image=None):
+    def __init__(self, name=None, cost=None, victoryPoints=None):
         self.Name = name
-        self.Set = set
         self.Cost = cost
-        self.Type = type
-        self.Effects = effects
-        self.Image = image
-
+        self.VictoryPoints = victoryPoints
