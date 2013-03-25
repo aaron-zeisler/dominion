@@ -1,5 +1,5 @@
-[
-    {
+cards = {
+    'dominion-adventurer' : {
         'name':'Adventurer',
         'set':'Base',
         'cost':6,
@@ -9,7 +9,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/adventurer.jpg'
     },
-    {
+    'dominion-bureaucrat' : {
         'name':'Bureaucrat',
         'set':'Base',
         'cost':4,
@@ -19,7 +19,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/bureaucrat.jpg'
     },
-    {
+    'dominion-cellar' : {
         'name':'Cellar',
         'set':'Base',
         'cost':2,
@@ -30,7 +30,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/cellar.jpg'
     },
-    {
+    'dominion-chancellor' : {
         'name':'Chancellor',
         'set':'Base',
         'cost':3,
@@ -41,7 +41,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/chancellor.jpg'
     },
-    {
+    'dominion-chapel' : {
         'name':'Chapel',
         'set':'Base',
         'cost':2,
@@ -51,7 +51,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/chapel.jpg'
     },
-    {
+    'dominion-council_room' : {
         'name':'Council Room',
         'set':'Base',
         'cost':5,
@@ -63,7 +63,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/councilroom.jpg'
     },
-    {
+    'dominion-feast' : {
         'name':'Feast',
         'set':'Base',
         'cost':4,
@@ -73,7 +73,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/feast.jpg'
     },
-    {
+    'dominion-festival' : {
         'name':'Festival',
         'set':'Base',
         'cost':5,
@@ -85,7 +85,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/festival.jpg'
     },
-    {
+    'dominion-gardens' : {
         'name':'Gardens',
         'set':'Base',
         'cost':4,
@@ -95,7 +95,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/gardens.jpg'
     },
-    {
+    'dominion-laboratory' : {
         'name':'Laboratory',
         'set':'Base',
         'cost':5,
@@ -106,7 +106,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/laboratory.jpg'
     },
-    {
+    'dominion-library' : {
         'name':'Library',
         'set':'Base',
         'cost':5,
@@ -114,9 +114,9 @@
         'effects': {
             'other':'Draw until you have 7 cards in hand. You may set aside any Action cards drawn this way, as you draw them; discard the set aside cards after you finish drawing.'
         },
-        'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/library.jpg';
+        'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/library.jpg'
     },
-    {
+    'dominion-market' : {
         'name':'Market',
         'set':'Base',
         'cost':5,
@@ -129,7 +129,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/market.jpg'
     },
-    {
+    'dominion-militia' : {
         'name':'Militia',
         'set':'Base',
         'cost':4,
@@ -140,7 +140,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/militia.jpg'
     },
-    {
+    'dominion-mine' : {
         'name':'Mine',
         'set':'Base',
         'cost':5,
@@ -150,7 +150,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/mine.jpg'
     },
-    {
+    'dominion-moat' : {
         'name':'Moat',
         'set':'Base',
         'cost':2,
@@ -161,7 +161,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/moat.jpg'
     },
-    {
+    'dominion-moneylender' : {
         'name':'Moneylender',
         'set':'Base',
         'cost':4,
@@ -171,7 +171,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/moneylender.jpg'
     },
-    {
+    'dominion-remodel' : {
         'name':'Remodel',
         'set':'Base',
         'cost':4,
@@ -181,7 +181,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/remodel.jpg'
     },
-    {
+    'dominion-smithy' : {
         'name':'Smithy',
         'set':'Base',
         'cost':4,
@@ -191,7 +191,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/smithy.jpg'
     },
-    {
+    'dominion-spy' : {
         'name':'Spy',
         'set':'Base',
         'cost':4,
@@ -203,7 +203,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/spy.jpg'
     },
-    {
+    'dominion-thief' : {
         'name':'Thief',
         'set':'Base',
         'cost':4,
@@ -213,7 +213,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/thief.jpg'
     },
-    {
+    'dominion-throne_room' : {
         'name':'Throne Room',
         'set':'Base',
         'cost':4,
@@ -223,7 +223,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/throneroom.jpg'
     },
-    {
+    'dominion-village' : {
         'name':'Village',
         'set':'Base',
         'cost':3,
@@ -234,7 +234,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/village.jpg'
     },
-    {
+    'dominion-witch' : {
         'name':'Witch',
         'set':'Base',
         'cost':5,
@@ -245,7 +245,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/witch.jpg'
     },
-    {
+    'dominion-woodcutter' : {
         'name':'Woodcutter',
         'set':'Base',
         'cost':3,
@@ -256,7 +256,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/woodcutter.jpg'
     },
-    {
+    'dominion-workshop' : {
         'name':'Workshop',
         'set':'Base',
         'cost':3,
@@ -266,7 +266,7 @@
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/workshop.jpg'
     },
-    {
+    'dominion-copper' : {
         'name':'Copper',
         'set':'Base',
         'cost':0,
@@ -276,7 +276,7 @@
         },
         'image':'http://dominion.diehrstraits.com/scans/common/copper.jpg'
     },
-    {
+    'dominion-silver' : {
         'name':'Silver',
         'set':'Base',
         'cost':3,
@@ -286,7 +286,7 @@
         },
         'image':'http://dominion.diehrstraits.com/scans/common/silver.jpg'
     },
-    {
+    'dominion-gold' : {
         'name':'Gold',
         'set':'Base',
         'cost':6,
@@ -296,7 +296,7 @@
         },
         'image':'http://dominion.diehrstraits.com/scans/common/gold.jpg'
     },
-    {
+    'dominion-estate' : {
         'name':'Estate',
         'set':'Base',
         'cost':2,
@@ -306,7 +306,7 @@
         },
         'image':'http://dominion.diehrstraits.com/scans/common/estate.jpg'
     },
-    {
+    'dominion-duchy' : {
         'name':'Duchy',
         'set':'Base',
         'cost':5,
@@ -316,7 +316,7 @@
         },
         'image':'http://dominion.diehrstraits.com/scans/common/duchy.jpg'
     },
-    {
+    'dominion-province' : {
         'name':'Province',
         'set':'Base',
         'cost':8,
@@ -326,7 +326,7 @@
         },
         'image':'http://dominion.diehrstraits.com/scans/common/province.jpg'
     },
-    {
+    'dominion-curse' : {
         'name':'Curse',
         'set':'Base',
         'type':'Curse',
@@ -335,7 +335,70 @@
         },
         'image':'http://dominion.diehrstraits.com/scans/common/curse.jpg'
     },
-]
+}
+
+decks = {
+    'first-game' : [
+        'dominion-cellar',
+        'dominion-market',
+        'dominion-militia',
+        'dominion-mine',
+        'dominion-moat',
+        'dominion-remodel',
+        'dominion-smithy',
+        'dominion-village',
+        'dominion-woodcutter',
+        'dominion-workshop',
+    ],
+    'big-money' : [
+        'dominion-adventurer',
+        'dominion-bureaucrat',
+        'dominion-chancellor',
+        'dominion-chapel',
+        'dominion-feast',
+        'dominion-laboratory',
+        'dominion-market',
+        'dominion-mine',
+        'dominion-moneylender',
+        'dominion-throne_room',
+    ],
+    'interaction' : [
+        'dominion-bureaucrat',
+        'dominion-chancellor',
+        'dominion-council_room',
+        'dominion-festival',
+        'dominion-library',
+        'dominion-militia',
+        'dominion-moat',
+        'dominion-spy',
+        'dominion-thief',
+        'dominion-village',
+    ],
+    'size-distortion' : [
+        'dominion-cellar',
+        'dominion-chapel',
+        'dominion-feast',
+        'dominion-gardens',
+        'dominion-laboratory',
+        'dominion-thief',
+        'dominion-village',
+        'dominion-witch',
+        'dominion-woodcutter',
+        'dominion-workshop',
+    ],
+    'village-square' : [
+        'dominion-bureaucrat',
+        'dominion-cellar',
+        'dominion-festival',
+        'dominion-library',
+        'dominion-market',
+        'dominion-remodel',
+        'dominion-smithy',
+        'dominion-throne_room',
+        'dominion-village',
+        'dominion-woodcutter',
+    ],
+}
 
 
 
