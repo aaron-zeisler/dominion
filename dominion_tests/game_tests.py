@@ -14,7 +14,7 @@ class MyTestCase(unittest.TestCase):
         game.addPlayer(playerOne)
         game.addPlayer(playerTwo)
 
-        game.initialize()
+        game.setUpGame()
 
         print "DEBUG: The game looks like this: %s" % game.__dict__
         print "DEBUG: The SupplyArea looks like this:"

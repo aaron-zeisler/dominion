@@ -2,7 +2,7 @@
 from dominion.supply_area import SupplyArea as SupplyAreaClass
 from dominion.card import Card
 from dominion.pile import Pile
-from dominion.cards import cards, decks
+from dominion import dominion_data, dominion_rules
 
 class Game(object):
 
@@ -16,52 +16,57 @@ class Game(object):
     def addPlayer(self, player):
         self.Players.append(player)
 
+    def setUpGame(self):
+        self._setUpTreasureCards()
+        self._setUpVictoryCards()
+        self._setUpCurseCards()
+        self._setUpKingdomCards()
 
-    def initialize(self):
-        #TODO:
-        # 0) Load cards from the data source
-        allCards = cards
+        self._setUpInitialDecks()
+        self._drawFirstHands()
 
+    def _setUpTreasureCards(self):
         # 1) Add Copper, Silver, and Gold to the SupplyArea
-        copperData = allCards['dominion-copper']
-        self._addCardsToPile(self.SupplyArea.CopperPile, copperData, 60)
-        silverData = allCards['dominion-silver']
-        self._addCardsToPile(self.SupplyArea.SilverPile, silverData, 40)
-        goldData = allCards['dominion-gold']
-        self._addCardsToPile(self.SupplyArea.GoldPile, goldData, 30)
+        copperData = dominion_data.cards['dominion-copper']
+        self.SupplyArea.CopperPile = self._makePile(copperData, dominion_rules.GAME_SETUP.COPPER_CARDS)
+        silverData = dominion_data.cards['dominion-silver']
+        self.SupplyArea.SilverPile = self._makePile(silverData, dominion_rules.GAME_SETUP.SILVER_CARDS)
+        goldData = dominion_data.cards['dominion-gold']
+        self.SupplyArea.GoldPile = self._makePile(goldData, dominion_rules.GAME_SETUP.GOLD_CARDS)
 
+    def _setUpVictoryCards(self):
         # 2) Add Estates, Duchies, and Provinces to the SupplyArea
-        numberOfVictoryCards = 12
-        if len(self.Players) == 2:
-            numberOfVictoryCards = 8
-        estateData = allCards['dominion-estate']
-        duchyData = allCards['dominion-duchy']
-        provinceData = allCards['dominion-province']
-        self._addCardsToPile(self.SupplyArea.EstatePile, estateData, numberOfVictoryCards)
-        self._addCardsToPile(self.SupplyArea.DuchyPile, duchyData, numberOfVictoryCards)
-        self._addCardsToPile(self.SupplyArea.ProvincePile, provinceData, numberOfVictoryCards)
-        additionalEstates = len(self.Players) * 3
-        self._addCardsToPile(self.SupplyArea.EstatePile, estateData, additionalEstates)
+        numberOfVictoryCards = dominion_rules.getGameSetupVictoryCardCount(len(self.Players))
+        estateData = dominion_data.cards['dominion-estate']
+        duchyData = dominion_data.cards['dominion-duchy']
+        provinceData = dominion_data.cards['dominion-province']
+        self.SupplyArea.EstatePile = self._makePile(estateData, numberOfVictoryCards)
+        self.SupplyArea.DuchyPile = self._makePile(duchyData, numberOfVictoryCards)
+        self.SupplyArea.ProvincePile = self._makePile(provinceData, numberOfVictoryCards)
+        additionalEstateCount = len(self.Players) * dominion_rules.FIRST_DECK.ESTATE_CARDS
+        additionalEstates = self._makePile(estateData, additionalEstateCount)
+        self.SupplyArea.EstatePile = self._combinePiles([self.SupplyArea.EstatePile, additionalEstates])
 
+    def _setUpCurseCards(self):
         # 3) Add Curses to the SupplyArea
-        curseData = allCards['dominion-curse']
-        self._addCardsToPile(self.SupplyArea.CursePile, curseData, 30)
+        curseData = dominion_data.cards['dominion-curse']
+        self.SupplyArea.CursePile = self._makePile(curseData, dominion_rules.GAME_SETUP.CURSE_CARDS)
 
+    def _setUpKingdomCards(self):
         # 4) Add Kingdom Cards to the SupplyArea
-        allDecks = decks
-        firstGameDeck = allDecks['first-game']
+        firstGameDeck = dominion_data.decks['first-game']
         for cardName in firstGameDeck:
-            cardData = allCards[cardName]
-            newPile = Pile()
-            self._addCardsToPile(newPile, cardData, 10)
+            cardData = dominion_data.cards[cardName]
+            newPile = self._makePile(cardData, dominion_rules.GAME_SETUP.KINGDOM_CARDS)
             self.SupplyArea.KingdomPiles[cardData['name']] = newPile
 
+    def _setUpInitialDecks(self):
         # 5) Deal Copper and Estate cards to each Player's DrawPile
         for player in self.Players:
-            for i in range(3):
+            for i in range(dominion_rules.FIRST_DECK.ESTATE_CARDS):
                 estate = self.SupplyArea.EstatePile.draw()
                 player.DrawPile.drop(estate)
-            for i in range(7):
+            for i in range(dominion_rules.FIRST_DECK.COPPER_CARDS):
                 copper = self.SupplyArea.CopperPile.draw()
                 player.DrawPile.drop(copper)
 
@@ -69,19 +74,27 @@ class Game(object):
         for player in self.Players:
             player.shuffle()
 
+    def _drawFirstHands(self):
         # 7) Have each Player draw 5 cards from their DrawPile into the Hand
         for player in self.Players:
-            for i in range(5):
-                player.draw()
+            player.drawHand()
 
-        pass
-
-    def _addCardsToPile(self, pile, cardData, howMany):
-        for i in range(howMany):
+    def _makePile(self, cardData, howManyCards):
+        pile = Pile()
+        for i in range(howManyCards):
             pile.drop(Card(
                 name=cardData['name'],
                 type=cardData['type'],
                 cost=cardData.get('cost', 0),
                 effects=cardData.get('effects', None),
                 imageUrl=cardData['image']))
+
+        return pile
+
+    def _combinePiles(self, pileArray):
+        newPile = Pile()
+        for pile in pileArray:
+            for card in pile.Cards:
+                newPile.drop(card)
+        return newPile
 
