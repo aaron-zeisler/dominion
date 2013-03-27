@@ -17,7 +17,9 @@ class Player(object):
         self.Hand = HandClass()
 
     def draw(self):
-        #TODO: If the draw pile is empty, move the discard pile to the draw pile and shuffle
+        if self.DrawPile.len() == 0:
+            self.moveDiscardPileToDrawPile()
+
         drawnCard = self.DrawPile.draw()
         self.Hand.draw(drawnCard)
 
@@ -27,3 +29,12 @@ class Player(object):
 
     def shuffle(self):
         self.DrawPile.shuffle()
+
+    def moveDiscardPileToDrawPile(self):
+        while self.DiscardPile.len() > 0:
+            self.DrawPile.drop(self.DiscardPile.draw())
+        self.DrawPile.shuffle()
+
+    def moveDrawPileToDiscardPile(self):
+        while self.DrawPile.len() > 0:
+            self.DiscardPile.drop(self.DrawPile.draw())

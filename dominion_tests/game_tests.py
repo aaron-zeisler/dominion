@@ -102,6 +102,33 @@ class MyTestCase(DominionTest):
         self.assertEqual(game.SupplyArea.KingdomPiles['Moat'], "dominion-moat pile")
         self.mocker.VerifyAll()
 
+    def test__setUpInitialDecks(self):
+        game = Game()
+        game.addPlayer(Player(name="Player 1"))
+        game.addPlayer(Player(name="Player 2"))
+        game.SupplyArea.EstatePile = game._makePile(dominion_data.cards['dominion-estate'], 20)
+        game.SupplyArea.CopperPile = game._makePile(dominion_data.cards['dominion-copper'], 20)
+
+        game._setUpInitialDecks()
+        for player in game.Players:
+            self.assertEqual(player.DrawPile.len(), 10)
+        self.assertEqual(game.SupplyArea.EstatePile.len(), (20 - (dominion_rules.FIRST_DECK.ESTATE_CARDS * 2)))
+        self.assertEqual(game.SupplyArea.CopperPile.len(), (20 - (dominion_rules.FIRST_DECK.COPPER_CARDS * 2)))
+
+    def test__drawFirstHands(self):
+        game = Game()
+        game.addPlayer(Player(name="Player 1"))
+        game.addPlayer(Player(name="Player 2"))
+        estatePile = game._makePile(dominion_data.cards['dominion-estate'], dominion_rules.FIRST_DECK.ESTATE_CARDS)
+        copperPile = game._makePile(dominion_data.cards['dominion-copper'], dominion_rules.FIRST_DECK.COPPER_CARDS)
+        for player in game.Players:
+            firstDeck = game._combinePiles([estatePile, copperPile])
+            player.DrawPile = firstDeck
+
+        game._drawFirstHands()
+        for player in game.Players:
+            self.assertEqual(player.DrawPile.len(), 5)
+            self.assertEqual(player.Hand.len(), 5)
 
 if __name__ == '__main__':
     unittest.main()
