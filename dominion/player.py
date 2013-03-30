@@ -23,9 +23,17 @@ class Player(object):
         drawnCard = self.DrawPile.draw()
         self.Hand.draw(drawnCard)
 
+    def discard(self, card):
+        self.DiscardPile.drop(self.Hand.discard(card))
+
     def drawHand(self):
         for i in range(dominion_rules.HAND_SIZE):
             self.draw()
+
+    def discardHand(self):
+        while self.Hand.len() > 0:
+            card = self.Hand.Cards[0]
+            self.discard(card)
 
     def shuffle(self):
         self.DrawPile.shuffle()

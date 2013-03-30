@@ -36,7 +36,7 @@ cards = {
         'cost':3,
         'type':'Action',
         'effects': {
-            'treasures':2,
+            'coins':2,
             'other':'You may immediately put your deck into your discard pile.'
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/chancellor.jpg'
@@ -81,7 +81,7 @@ cards = {
         'effects': {
             'actions':2,
             'buys':1,
-            'treasures':2
+            'coins':2
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/festival.jpg'
     },
@@ -125,7 +125,7 @@ cards = {
             'cards':1,
             'actions':1,
             'buys':1,
-            'treasures':1
+            'coins':1
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/market.jpg'
     },
@@ -135,7 +135,7 @@ cards = {
         'cost':4,
         'type':'Action - Attack',
         'effects': {
-            'treasures':2,
+            'coins':2,
             'other':'Each other player discards down to 3 cards in their hand.'
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/militia.jpg'
@@ -252,7 +252,7 @@ cards = {
         'type':'Action',
         'effects': {
             'buys':1,
-            'treasures':2
+            'coins':2
         },
         'image':'http://www.dominiondeck.com/sites/default/files/imagecache/cards-landing/cards/woodcutter.jpg'
     },
@@ -272,7 +272,7 @@ cards = {
         'cost':0,
         'type':'Treasure',
         'effects': {
-            'treasures':1
+            'coins':1
         },
         'image':'http://dominion.diehrstraits.com/scans/common/copper.jpg'
     },
@@ -282,7 +282,7 @@ cards = {
         'cost':3,
         'type':'Treasure',
         'effects': {
-            'treasures':2
+            'coins':2
         },
         'image':'http://dominion.diehrstraits.com/scans/common/silver.jpg'
     },
@@ -292,7 +292,7 @@ cards = {
         'cost':6,
         'type':'Treasure',
         'effects': {
-            'treasures':3
+            'coins':3
         },
         'image':'http://dominion.diehrstraits.com/scans/common/gold.jpg'
     },

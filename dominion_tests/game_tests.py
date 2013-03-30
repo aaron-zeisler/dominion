@@ -4,6 +4,7 @@ from dominion_tests.dominion_test import DominionTest
 from dominion import dominion_rules, dominion_data
 from dominion.game import Game
 from dominion.player import Player
+from dominion.pile import Pile
 
 
 class MyTestCase(DominionTest):
@@ -129,6 +130,33 @@ class MyTestCase(DominionTest):
         for player in game.Players:
             self.assertEqual(player.DrawPile.len(), 5)
             self.assertEqual(player.Hand.len(), 5)
+
+    def test_over__notOver(self):
+        game = Game()
+        game.addPlayer(Player(name="Player 1"))
+        game.addPlayer(Player(name="Player 2"))
+        game.setUpGame()
+        self.assertFalse(game.over())
+
+    def test_over__emptyProvincePile(self):
+        game = Game()
+        game.addPlayer(Player(name="Player 1"))
+        game.addPlayer(Player(name="Player 2"))
+        game.setUpGame()
+
+        game.SupplyArea.ProvincePile = Pile()
+        self.assertTrue(game.over())
+
+    def test_over__threeEmptyPiles(self):
+        game = Game()
+        game.addPlayer(Player(name="Player 1"))
+        game.addPlayer(Player(name="Player 2"))
+        game.setUpGame()
+
+        game.SupplyArea.DuchyPile = Pile()
+        for i in range(2):
+            game.SupplyArea.KingdomPiles[i] = Pile()
+        self.assertTrue(game.over())
 
 if __name__ == '__main__':
     unittest.main()

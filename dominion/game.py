@@ -98,3 +98,19 @@ class Game(object):
                 newPile.drop(card)
         return newPile
 
+
+    def over(self):
+        # The game is over if ...
+        # 1) The Province pile is empty, or
+        # 2) any 3 piles are empty
+        if self.SupplyArea.ProvincePile.len() == 0:
+            return True
+
+        emptyPiles = 0
+        for cardName, pile in self.SupplyArea.allPiles().iteritems():
+            if pile.len() == 0:
+                emptyPiles += 1
+                if emptyPiles >= 3:
+                    return True
+
+        return False

@@ -1,5 +1,6 @@
 
 from dominion.pile import Pile
+from dominion import dominion_data
 
 class SupplyArea(object):
 
@@ -23,3 +24,13 @@ class SupplyArea(object):
         self.DuchyPile = Pile()
         self.ProvincePile = Pile()
         self.KingdomPiles = {}
+
+    def allPiles(self):
+        allPiles = self.KingdomPiles
+        allPiles[dominion_data.cards['dominion-province']['name']] = self.ProvincePile
+        allPiles[dominion_data.cards['dominion-duchy']['name']] = self.DuchyPile
+        allPiles[dominion_data.cards['dominion-estate']['name']] = self.EstatePile
+        allPiles[dominion_data.cards['dominion-copper']['name']] = self.CopperPile
+        allPiles[dominion_data.cards['dominion-silver']['name']] = self.SilverPile
+        allPiles[dominion_data.cards['dominion-gold']['name']] = self.GoldPile
+        return allPiles
