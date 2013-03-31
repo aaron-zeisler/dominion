@@ -22,6 +22,7 @@ class Player(object):
 
         drawnCard = self.DrawPile.draw()
         self.Hand.draw(drawnCard)
+        return drawnCard
 
     def discard(self, card):
         self.DiscardPile.drop(self.Hand.discard(card))

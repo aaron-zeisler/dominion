@@ -38,16 +38,23 @@ class DominionClient():
         while not game.over():
             for player in game.Players:
                 currentTurn = Turn()
+
+                # Count the number of coins
+                for card in player.Hand.Cards:
+                    currentTurn.Coins += card.Effects.get('coins', 0)
+
                 print "-- %s --" % player.Name
                 while currentTurn.ActionsLeft > 0 or currentTurn.BuysLeft > 0:
                     # Choose a card to play
                     cardNumber = None
                     while cardNumber is None:
+                        # Display the player's hand and options
                         print "You have %s actions, %s buys, and %s coins" % (currentTurn.ActionsLeft, currentTurn.BuysLeft, currentTurn.Coins)
                         print "Your hand is"
                         for i in range(player.Hand.len()):
                             print "%s: %s" % (i, player.Hand.Cards[i].Name)
 
+                        # Get user input for the card to play
                         try:
                             cardNumber = input("Choose a card to play (enter the number), or 100 to buy, or 99 to end: ")
                         except (IndexError, NameError) as e:
@@ -61,25 +68,29 @@ class DominionClient():
 
                     # Player is buying a card ...
                     elif cardNumber == 100:
+                        # Make sure the player has enough buys
                         if currentTurn.BuysLeft == 0:
                             print "You don't have another buy"
                         else:
+                            # Get player input for the card to buy
                             buyCardName = None
                             while buyCardName is None:
                                 try:
                                     print "The available cards are"
                                     for cardName, pile in game.SupplyArea.allPiles().iteritems():
-                                        print "%s (%s)" % (cardName, pile.len())
+                                        print "%s (%s coins) (%s left)" % (cardName, pile.Cards[0].Cost, pile.len())
                                     buyCardName = raw_input("Enter the name of the card you wish to buy: ")
                                     buyCard = game.SupplyArea.allPiles()[buyCardName].Cards[0]
-                                except NameError, e:
+                                except (NameError, KeyError) as e:
                                     print "That isn't an option.  Try again"
                                     buyCardName = None
 
                             buyCardCost = game.SupplyArea.allPiles()[buyCardName].Cards[0].Cost
+                            # Make sure the player has enough coins
                             if buyCardCost > currentTurn.Coins:
                                 print "You don't have enough coins to buy that card"
                             else:
+                                # Buy the card
                                 currentTurn.Coins -= buyCardCost
                                 currentTurn.BuysLeft -= 1
                                 player.DiscardPile.drop(game.SupplyArea.allPiles()[buyCardName].draw())
@@ -90,6 +101,7 @@ class DominionClient():
                         try:
                             card = player.Hand.Cards[int(cardNumber)]
                             if card.Type.startswith("Action"):
+                                # Make sure the player has enough actions
                                 if currentTurn.ActionsLeft == 0:
                                     print "You don't have any actions left"
                                 else:
@@ -114,7 +126,8 @@ class DominionClient():
         turn.BuysLeft += card.Effects.get('buys', 0)
         turn.Coins += card.Effects.get('coins', 0)
         for i in range(card.Effects.get('cards', 0)):
-            player.draw()
+            drawnCard = player.draw()
+            turn.Coins += drawnCard.Effects.get('coins', 0)
         return turn
 
 if __name__ == '__main__':
