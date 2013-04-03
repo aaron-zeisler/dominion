@@ -7,6 +7,7 @@ class Card(object):
     Effects = None
     ImageURL = None
 
+
     def __init__(self, name=None, type=None, cost=None, effects=None, imageUrl=None):
         self.Name = name
         self.Type = type

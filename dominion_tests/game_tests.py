@@ -40,9 +40,9 @@ class MyTestCase(DominionTest):
 
     def test__setUpTreasureCards(self):
         self.mocker.StubOutWithMock(Game, '_makePile')
-        Game._makePile(dominion_data.cards['dominion-copper'], dominion_rules.GAME_SETUP.COPPER_CARDS).AndReturn("copper pile")
-        Game._makePile(dominion_data.cards['dominion-silver'], dominion_rules.GAME_SETUP.SILVER_CARDS).AndReturn("silver pile")
-        Game._makePile(dominion_data.cards['dominion-gold'], dominion_rules.GAME_SETUP.GOLD_CARDS).AndReturn("gold pile")
+        Game._makePile(dominion_data.cards['copper'], dominion_rules.GAME_SETUP.COPPER_CARDS).AndReturn("copper pile")
+        Game._makePile(dominion_data.cards['silver'], dominion_rules.GAME_SETUP.SILVER_CARDS).AndReturn("silver pile")
+        Game._makePile(dominion_data.cards['gold'], dominion_rules.GAME_SETUP.GOLD_CARDS).AndReturn("gold pile")
         self.mocker.ReplayAll()
 
         game = Game()
@@ -58,10 +58,10 @@ class MyTestCase(DominionTest):
         self.mocker.StubOutWithMock(Game, '_makePile')
         self.mocker.StubOutWithMock(Game, '_combinePiles')
         dominion_rules.getGameSetupVictoryCardCount(0).AndReturn(victoryCards)
-        Game._makePile(dominion_data.cards['dominion-estate'], victoryCards).AndReturn("estate pile")
-        Game._makePile(dominion_data.cards['dominion-duchy'], victoryCards).AndReturn("duchy pile")
-        Game._makePile(dominion_data.cards['dominion-province'], victoryCards).AndReturn("province pile")
-        Game._makePile(dominion_data.cards['dominion-estate'], 0).AndReturn("additional estates")
+        Game._makePile(dominion_data.cards['estate'], victoryCards).AndReturn("estate pile")
+        Game._makePile(dominion_data.cards['duchy'], victoryCards).AndReturn("duchy pile")
+        Game._makePile(dominion_data.cards['province'], victoryCards).AndReturn("province pile")
+        Game._makePile(dominion_data.cards['estate'], 0).AndReturn("additional estates")
         Game._combinePiles(["estate pile","additional estates"]).AndReturn("updated estate pile")
         self.mocker.ReplayAll()
 
@@ -74,7 +74,7 @@ class MyTestCase(DominionTest):
 
     def test__setUpCurseCards(self):
         self.mocker.StubOutWithMock(Game, '_makePile')
-        Game._makePile(dominion_data.cards['dominion-curse'], dominion_rules.GAME_SETUP.CURSE_CARDS).AndReturn("curse pile")
+        Game._makePile(dominion_data.cards['curse'], dominion_rules.GAME_SETUP.CURSE_CARDS).AndReturn("curse pile")
         self.mocker.ReplayAll()
 
         game = Game()
@@ -83,11 +83,11 @@ class MyTestCase(DominionTest):
         self.mocker.VerifyAll()
 
     def test__setUpKingdomCards(self):
-        dominion_data.decks['first-game'] = ['dominion-cellar',
-                                             'dominion-market',
-                                             'dominion-militia',
-                                             'dominion-mine',
-                                             'dominion-moat',]
+        dominion_data.decks['first-game'] = ['cellar',
+                                             'market',
+                                             'militia',
+                                             'mine',
+                                             'moat',]
         self.mocker.StubOutWithMock(Game, '_makePile')
         for cardName in dominion_data.decks['first-game']:
             Game._makePile(dominion_data.cards[cardName], dominion_rules.GAME_SETUP.KINGDOM_CARDS).AndReturn("%s pile" % cardName)
@@ -96,19 +96,19 @@ class MyTestCase(DominionTest):
         game = Game()
         game._setUpKingdomCards()
         self.assertEqual(len(game.SupplyArea.KingdomPiles), 5)
-        self.assertEqual(game.SupplyArea.KingdomPiles['Cellar'], "dominion-cellar pile")
-        self.assertEqual(game.SupplyArea.KingdomPiles['Market'], "dominion-market pile")
-        self.assertEqual(game.SupplyArea.KingdomPiles['Militia'], "dominion-militia pile")
-        self.assertEqual(game.SupplyArea.KingdomPiles['Mine'], "dominion-mine pile")
-        self.assertEqual(game.SupplyArea.KingdomPiles['Moat'], "dominion-moat pile")
+        self.assertEqual(game.SupplyArea.KingdomPiles['Cellar'], "cellar pile")
+        self.assertEqual(game.SupplyArea.KingdomPiles['Market'], "market pile")
+        self.assertEqual(game.SupplyArea.KingdomPiles['Militia'], "militia pile")
+        self.assertEqual(game.SupplyArea.KingdomPiles['Mine'], "mine pile")
+        self.assertEqual(game.SupplyArea.KingdomPiles['Moat'], "moat pile")
         self.mocker.VerifyAll()
 
     def test__setUpInitialDecks(self):
         game = Game()
         game.addPlayer(Player(name="Player 1"))
         game.addPlayer(Player(name="Player 2"))
-        game.SupplyArea.EstatePile = game._makePile(dominion_data.cards['dominion-estate'], 20)
-        game.SupplyArea.CopperPile = game._makePile(dominion_data.cards['dominion-copper'], 20)
+        game.SupplyArea.EstatePile = game._makePile(dominion_data.cards['estate'], 20)
+        game.SupplyArea.CopperPile = game._makePile(dominion_data.cards['copper'], 20)
 
         game._setUpInitialDecks()
         for player in game.Players:
@@ -120,8 +120,8 @@ class MyTestCase(DominionTest):
         game = Game()
         game.addPlayer(Player(name="Player 1"))
         game.addPlayer(Player(name="Player 2"))
-        estatePile = game._makePile(dominion_data.cards['dominion-estate'], dominion_rules.FIRST_DECK.ESTATE_CARDS)
-        copperPile = game._makePile(dominion_data.cards['dominion-copper'], dominion_rules.FIRST_DECK.COPPER_CARDS)
+        estatePile = game._makePile(dominion_data.cards['estate'], dominion_rules.FIRST_DECK.ESTATE_CARDS)
+        copperPile = game._makePile(dominion_data.cards['copper'], dominion_rules.FIRST_DECK.COPPER_CARDS)
         for player in game.Players:
             firstDeck = game._combinePiles([estatePile, copperPile])
             player.DrawPile = firstDeck

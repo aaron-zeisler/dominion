@@ -27,10 +27,10 @@ class SupplyArea(object):
 
     def allPiles(self):
         allPiles = self.KingdomPiles
-        allPiles[dominion_data.cards['dominion-province']['name']] = self.ProvincePile
-        allPiles[dominion_data.cards['dominion-duchy']['name']] = self.DuchyPile
-        allPiles[dominion_data.cards['dominion-estate']['name']] = self.EstatePile
-        allPiles[dominion_data.cards['dominion-copper']['name']] = self.CopperPile
-        allPiles[dominion_data.cards['dominion-silver']['name']] = self.SilverPile
-        allPiles[dominion_data.cards['dominion-gold']['name']] = self.GoldPile
+        allPiles[dominion_data.cards['province']['name']] = self.ProvincePile
+        allPiles[dominion_data.cards['duchy']['name']] = self.DuchyPile
+        allPiles[dominion_data.cards['estate']['name']] = self.EstatePile
+        allPiles[dominion_data.cards['copper']['name']] = self.CopperPile
+        allPiles[dominion_data.cards['silver']['name']] = self.SilverPile
+        allPiles[dominion_data.cards['gold']['name']] = self.GoldPile
         return allPiles

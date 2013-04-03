@@ -27,19 +27,19 @@ class Game(object):
 
     def _setUpTreasureCards(self):
         # 1) Add Copper, Silver, and Gold to the SupplyArea
-        copperData = dominion_data.cards['dominion-copper']
+        copperData = dominion_data.cards['copper']
         self.SupplyArea.CopperPile = self._makePile(copperData, dominion_rules.GAME_SETUP.COPPER_CARDS)
-        silverData = dominion_data.cards['dominion-silver']
+        silverData = dominion_data.cards['silver']
         self.SupplyArea.SilverPile = self._makePile(silverData, dominion_rules.GAME_SETUP.SILVER_CARDS)
-        goldData = dominion_data.cards['dominion-gold']
+        goldData = dominion_data.cards['gold']
         self.SupplyArea.GoldPile = self._makePile(goldData, dominion_rules.GAME_SETUP.GOLD_CARDS)
 
     def _setUpVictoryCards(self):
         # 2) Add Estates, Duchies, and Provinces to the SupplyArea
         numberOfVictoryCards = dominion_rules.getGameSetupVictoryCardCount(len(self.Players))
-        estateData = dominion_data.cards['dominion-estate']
-        duchyData = dominion_data.cards['dominion-duchy']
-        provinceData = dominion_data.cards['dominion-province']
+        estateData = dominion_data.cards['estate']
+        duchyData = dominion_data.cards['duchy']
+        provinceData = dominion_data.cards['province']
         self.SupplyArea.EstatePile = self._makePile(estateData, numberOfVictoryCards)
         self.SupplyArea.DuchyPile = self._makePile(duchyData, numberOfVictoryCards)
         self.SupplyArea.ProvincePile = self._makePile(provinceData, numberOfVictoryCards)
@@ -49,7 +49,7 @@ class Game(object):
 
     def _setUpCurseCards(self):
         # 3) Add Curses to the SupplyArea
-        curseData = dominion_data.cards['dominion-curse']
+        curseData = dominion_data.cards['curse']
         self.SupplyArea.CursePile = self._makePile(curseData, dominion_rules.GAME_SETUP.CURSE_CARDS)
 
     def _setUpKingdomCards(self):

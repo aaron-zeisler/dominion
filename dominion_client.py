@@ -105,10 +105,9 @@ class DominionClient():
                                 if currentTurn.ActionsLeft == 0:
                                     print "You don't have any actions left"
                                 else:
-                                    currentTurn.ActionsLeft -= 1
-                                    currentTurn = self._applyCardEffects(card, currentTurn, player)
+                                    currentTurn = self._applyCardEffects(card, currentTurn, player, game)
                             else:
-                                currentTurn = self._applyCardEffects(card, currentTurn, player)
+                                currentTurn = self._applyCardEffects(card, currentTurn, player, game)
 
                             player.discard(card)
                         except IndexError, e:
@@ -121,13 +120,55 @@ class DominionClient():
 
         print "The Game Is Over"
 
-    def _applyCardEffects(self, card, turn, player):
+    def _applyCardEffects(self, card, turn, player, game):
+        # Standard card effects
         turn.ActionsLeft += card.Effects.get('actions', 0)
         turn.BuysLeft += card.Effects.get('buys', 0)
         turn.Coins += card.Effects.get('coins', 0)
         for i in range(card.Effects.get('cards', 0)):
             drawnCard = player.draw()
             turn.Coins += drawnCard.Effects.get('coins', 0)
+        if card.Type.startswith("Action"):
+            turn.ActionsLeft -= 1
+
+        # Card-specific effects
+        if card.Name == "Adventurer":
+            treasuresFound = 0
+            while treasuresFound < 2:
+                drawnCard = player.draw()
+                if drawnCard.Type == "Treasure":
+                    treasuresFound += 1
+                else:
+                    player.discard(drawnCard)
+
+        if card.Name == "Bureaucrat":
+            silverCard = game.SupplyArea.SilverPile.draw()
+            player.DrawPile.drop(silverCard)
+            for otherPlayer in game.Players:
+                if otherPlayer != player:
+                    for handCard in otherPlayer.Hand.Cards:
+                        if handCard.Type == "Victory":
+                            otherPlayer.DrawPile.drop(otherPlayer.Hand.discard(handCard))
+                            break
+
+        # Come back to this one ...
+        #if card.Name == "Cellar":
+        #    print "Your hand is"
+        #    for i in range(player.Hand.len()):
+        #        print "%s: %s" % (i, player.Hand.Cards[i].Name)
+        #    cardList = raw_input("Enter the cards you would like to discard, separated by commas.  Enter 99 to cancel.")
+        #    if cardList != "99":
+        #        cardList = list(cardList)
+        #        for
+
+        if card.Name == "Chancellor":
+            answer = raw_input("Would you like to put your deck into your discard pile now (y/n)?")
+            if answer.lower() == "y":
+                player.moveDrawPileToDiscardPile()
+
+        # Come back to this one
+        #if card.Name == "Chapel":
+
         return turn
 
 if __name__ == '__main__':
